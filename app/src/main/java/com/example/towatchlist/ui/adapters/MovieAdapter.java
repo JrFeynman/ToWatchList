@@ -15,6 +15,7 @@ import java.util.Locale;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.Holder> {
     public interface OnItemClick { void onClick(Movie m); }
+
     private final List<Movie> list;
     private final OnItemClick listener;
 
@@ -57,11 +58,25 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.Holder> {
     }
 
     @Override
-    public int getItemCount() { return list.size(); }
+    public int getItemCount() {
+        return list.size();
+    }
+
+    /**
+     * Yeni bir liste geldiğinde adapter’ı güncellemek için
+     */
+    public void setMovies(List<Movie> newMovies) {
+        list.clear();
+        if (newMovies != null) {
+            list.addAll(newMovies);
+        }
+        notifyDataSetChanged();
+    }
 
     static class Holder extends RecyclerView.ViewHolder {
         ImageView poster;
         TextView title, year, rating;
+
         Holder(@NonNull View itemView) {
             super(itemView);
             poster = itemView.findViewById(R.id.ivPoster);

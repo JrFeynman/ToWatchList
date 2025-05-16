@@ -1,16 +1,106 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data />
-
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/home_root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMovies"
+        <!-- TÜR BUTONLARI BAŞLANGIÇ -->
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp"
-            android:clipToPadding="false" />
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp">
 
-    </FrameLayout>
+            <LinearLayout
+                android:id="@+id/llGenres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnGenreAction"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/teal_200"
+                    android:insetLeft="16dp"
+                    android:insetRight="16dp"
+                    android:text="Action" />
+
+                <Button
+                    android:id="@+id/btnGenreComedy"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/teal_200"
+                    android:insetLeft="16dp"
+                    android:insetRight="16dp"
+                    android:text="Comedy" />
+
+                <Button
+                    android:id="@+id/btnGenreDrama"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/teal_200"
+                    android:insetLeft="16dp"
+                    android:insetRight="16dp"
+                    android:text="Drama" />
+
+                <Button
+                    android:id="@+id/btnGenreHorror"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/teal_200"
+                    android:insetLeft="16dp"
+                    android:insetRight="16dp"
+                    android:text="Horror" />
+
+                <Button
+                    android:id="@+id/btnGenreRomance"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/teal_200"
+                    android:insetLeft="16dp"
+                    android:insetRight="16dp"
+                    android:text="Romance" />
+
+                <Button
+                    android:id="@+id/btnGenreSciFi"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/teal_200"
+                    android:insetLeft="16dp"
+                    android:insetRight="16dp"
+                    android:text="Sci-Fi" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+        <!-- TÜR BUTONLARI BİTİŞ -->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMovies"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:clipToPadding="false" />
+
+        </FrameLayout>
+
+    </LinearLayout>
 </layout>

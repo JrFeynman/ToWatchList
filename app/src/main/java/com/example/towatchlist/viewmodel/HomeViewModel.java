@@ -4,21 +4,35 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import com.example.towatchlist.data.model.Movie;
 import com.example.towatchlist.data.repository.MovieRepository;
 import java.util.List;
 
 public class HomeViewModel extends AndroidViewModel {
     private final MovieRepository repo;
-    private LiveData<List<Movie>> movies;
+    private final MutableLiveData<Integer> selectedGenre = new MutableLiveData<>();
+    private final LiveData<List<Movie>> movies;
 
-    public HomeViewModel(@NonNull Application app) {
-        super(app);
-        repo = new MovieRepository(app);
+    public HomeViewModel(@NonNull Application application) {
+        super(application);
+        // ➊ önce repo'yu oluştur
+        repo = new MovieRepository(application);
+        // ➋ sonra repo kullanarak switchMap ile movies LiveData'sını başlat
+        movies = Transformations.switchMap(
+                selectedGenre,
+                genreId -> repo.getMoviesByGenre(genreId)
+        );
     }
 
-    public void fetchMovies(int genreId) {
-        movies = repo.getMoviesByGenre(genreId);
+    /** Kullanıcı tür seçtiğinde çağrılır */
+    public void setGenre(int genreId) {
+        selectedGenre.setValue(genreId);
     }
-    public LiveData<List<Movie>> getMovies() { return movies; }
+
+    /** Fragment burayı observe eder */
+    public LiveData<List<Movie>> getMovies() {
+        return movies;
+    }
 }

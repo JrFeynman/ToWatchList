@@ -31,8 +31,9 @@ public class WatchlistFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentWatchlistBinding.inflate(inflater, container, false);
-        SharedPreferences prefs =
-                requireActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        // SharedPreferences’ten userId oku
+        SharedPreferences prefs = requireActivity()
+                .getSharedPreferences("prefs", Context.MODE_PRIVATE);
         userId = prefs.getInt("userId", -1);
         return binding.getRoot();
     }
@@ -42,13 +43,30 @@ public class WatchlistFragment extends Fragment {
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Çıkış Yap butonunu dinle
+        // ↓ Burayı güncelledik ↓
+        binding.btnLogout.setOnClickListener(v -> {
+            SharedPreferences prefs = requireActivity()
+                    .getSharedPreferences("prefs", Context.MODE_PRIVATE);
+            prefs.edit()
+                    .remove("isRemembered")
+                    .remove("userId")
+                    .apply();
+            // Global action ile login’e dön
+            Navigation.findNavController(v)
+                    .navigate(R.id.action_global_loginFragment);
+        });
+
+        // ViewModel’i al
         AndroidViewModelFactory factory =
                 AndroidViewModelFactory.getInstance(requireActivity().getApplication());
         viewModel = new ViewModelProvider(this, factory)
                 .get(WatchlistViewModel.class);
 
+        // Kullanıcının watchlist’ini yükle
         viewModel.fetchForUser(userId);
 
+        // Listeyi observe edip RecyclerView’a ata
         viewModel.getList().observe(getViewLifecycleOwner(), this::setupRecyclerView);
     }
 

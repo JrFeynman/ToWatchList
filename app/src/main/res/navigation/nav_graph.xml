@@ -39,6 +39,10 @@
     <action
         android:id="@+id/action_watchlistFragment_to_detailFragment"
         app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_global_loginFragment"
+            app:destination="@id/loginFragment"
+        app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -49,5 +53,6 @@
             android:id="@+id/action_searchFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+
 
 </navigation>

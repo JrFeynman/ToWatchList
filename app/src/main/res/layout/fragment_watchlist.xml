@@ -1,16 +1,30 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <data />
-
-    <FrameLayout
+    <data/>
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
+        <!-- 1) RecyclerView screen üstünden başlayıp butonun üstüne kadar uzanır -->
+
+        <!-- 2) Sağ-alt köşedeki çıkış butonu -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvWatchlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp"
-            android:clipToPadding="false" />
+            android:layout_above="@id/btnLogout"
+            android:layout_marginBottom="0dp" />
 
-    </FrameLayout>
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="100dp"
+            android:text="Çıkış Yap" />
+    </RelativeLayout>
 </layout>
